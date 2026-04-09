@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Vyapsicologia – Referência em saúde mental em Brotas-SP. Psicoterapia, psicodiagnóstico, metodologia ABA e orientação de carreira."/>
+  <title>Vyapsicologia – Referência em saúde mental em Brotas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --brand:       #f45905;
+      --brand-dark:  #c94600;
+      --brand-light: #fff2eb;
+      --dark:        #2c2c2c;
+      --teal:        #005b71;
+      --yellow:      #ffd300;
+      --white:       #ffffff;
+      --bg:          #fafaf8;
+      --card:        #ffffff;
+      --border:      #e8e8e8;
+      --muted:       #555;
+      --radius:      18px;
+      --nav-height:  70px;
+      --bar-height:  40px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0;
+      background: var(--bg);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .section-title {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      letter-spacing: 0.17em;
+      line-height: 1.2;
+    }
+
+    .section-label, .hero-badge, .btn, .nav-links a, .footer-col h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.242em;
+    }
+
+    p, li, .hero-desc, .feature-card p,
+    .section-desc, .footer-brand p, .footer-col a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300 !important;
+      letter-spacing: 0;
+    }
+
+    /* ── HELLO BAR ── */
+    .hello-bar {
+      background: var(--teal); color: var(--white);
+      text-align: center; padding: 10px 5%;
+      font-size: 0.75rem; letter-spacing: 0.05em;
+      position: relative; z-index: 200;
+    }
+    .hello-bar a {
+      color: var(--yellow); font-weight: 700; text-decoration: underline;
+    }
+
+    /* ── NAV ── 
+       Solução definitiva para o menu que some:
+       O header (hello-bar + nav) é position:sticky como um bloco único.
+       Assim o nav nunca sai do fluxo e nunca desaparece.
+    ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: var(--nav-height);
+      position: relative;
+    }
+
+    .nav-logo { display: inline-flex; align-items: center; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--dark);
+      font-size: 0.68rem; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--brand); }
+    .nav-actions { display: flex; gap: 12px; align-items: center; }
+
+    /* ── BOTÕES ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 11px 24px; border-radius: 50px;
+      font-size: 0.72rem; cursor: pointer;
+      text-decoration: none; border: none; transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .btn-primary {
+      background: var(--brand); color: var(--white);
+      box-shadow: 0 4px 18px rgba(244,89,5,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--brand-dark); transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(244,89,5,0.35);
+    }
+    .btn-teal {
+      background: var(--teal); color: var(--white);
+      box-shadow: 0 4px 18px rgba(0,91,113,0.25);
+    }
+    .btn-teal:hover { background: #004d60; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; align-items: center;
+      padding: 36px 5% 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -120px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(244,89,5,0.10) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brand-light); color: var(--brand);
+      border-radius: 50px; padding: 6px 18px;
+      font-size: 0.62rem; margin-bottom: 24px;
+    }
+    .hero-badge::before { content: '✦'; }
+
+    h1 {
+      font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+      color: var(--dark); margin-bottom: 20px;
+    }
+    h1 em { font-style: italic; color: var(--brand); }
+
+    .hero-desc {
+      font-size: 0.95rem; color: var(--muted);
+      line-height: 1.8; max-width: 460px; margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .hero-img {
+      border-radius: var(--radius); overflow: hidden;
+      background: linear-gradient(135deg, #fff2eb 0%, #ffe8d6 100%);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 420px;
+    }
+
+    /* ── CARROSSEL ── */
+    .carousel-section {
+      padding: 70px 5%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .carousel-header { text-align: center; margin-bottom: 40px; }
+    .carousel-header .section-label { display: block; margin-bottom: 10px; }
+    .carousel-wrapper { position: relative; overflow: hidden; border-radius: var(--radius); }
+    .carousel-track {
+      display: flex; gap: 15px;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .carousel-slide {
+      min-width: calc(50% - 8px);
+      border-radius: var(--radius); overflow: hidden;
+      background: var(--brand-light); flex-shrink: 0;
+    }
+    .carousel-slide img {
+      width: 100%; height: 450px;
+      object-fit: cover; display: block; border-radius: 12px;
+    }
+    .carousel-controls {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin-top: 28px;
+    }
+    .carousel-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--white); color: var(--dark);
+      font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .carousel-btn:hover {
+      background: var(--brand); border-color: var(--brand);
+      color: var(--white); transform: scale(1.05);
+    }
+    .carousel-dots { display: flex; gap: 8px; }
+    .carousel-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--border); cursor: pointer;
+      transition: all 0.2s; border: none;
+    }
+    .carousel-dot.active { background: var(--brand); width: 24px; border-radius: 4px; }
+
+    /* ── SERVIÇOS ── */
+    .features { padding: 90px 5%; }
+    .section-label {
+      font-size: 0.65rem; color: var(--brand);
+      text-transform: uppercase; margin-bottom: 12px; display: block;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+      color: var(--dark); margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 0.93rem; color: var(--muted);
+      max-width: 520px; line-height: 1.8; margin-bottom: 56px;
+    }
+    .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .feature-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(244,89,5,0.1);
+      border-color: rgba(244,89,5,0.3);
+    }
+    .feature-icon {
+      width: 48px; height: 48px; background: var(--brand-light);
+      border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 20px;
+    }
+    .feature-card h3 { font-size: 0.98rem; color: var(--dark); margin-bottom: 10px; }
+    .feature-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── NOSSA EQUIPE ── */
+    .team-section { background: var(--brand-light); padding: 90px 5%; }
+    .team-header { margin-bottom: 52px; }
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .team-card {
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(244,89,5,0.12);
+    }
+    .team-photo {
+      width: 100%; aspect-ratio: 1/1;
+      background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; color: #bbb; overflow: hidden;
+    }
+    .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .team-info { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .team-name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem; font-weight: 700;
+      letter-spacing: 0.1em; color: var(--dark); margin-bottom: 4px;
+    }
+    .team-role {
+      font-size: 0.75rem; color: var(--brand);
+      font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .team-bio {
+      font-size: 0.83rem !important; color: var(--muted) !important;
+      line-height: 1.7; flex: 1; margin-bottom: 20px;
+    }
+    .team-socials { display: flex; gap: 10px; margin-top: auto; }
+    .team-social-link {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg); border: 1px solid var(--border);
+      text-decoration: none; font-size: 1rem; transition: all 0.2s;
+    }
+    .team-social-link:hover {
+      background: var(--brand); border-color: var(--brand); transform: scale(1.1);
+    }
+    .team-social-link svg { width: 16px; height: 16px; fill: var(--dark); transition: fill 0.2s; }
+    .team-social-link:hover svg { fill: var(--white); }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 100px 5%; text-align: center;
+      background: var(--teal); position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,211,0,0.15) 0%, transparent 65%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .cta-section h2 {
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      color: var(--white); margin-bottom: 16px; position: relative;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.7); font-size: 0.95rem;
+      margin-bottom: 40px; position: relative;
+    }
+    .cta-section .btn-primary { font-size: 0.78rem; padding: 16px 40px; position: relative; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 60px 5% 32px; }
+    .footer-logo { display: inline-flex; align-items: center; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+    .footer-brand p { margin-top: 14px; font-size: 0.82rem; line-height: 1.65; max-width: 260px; }
+    .footer-col h5 { color: var(--white); font-size: 0.68rem; margin-bottom: 16px; }
+    .footer-col a {
+      display: block; color: rgba(255,255,255,0.5);
+      text-decoration: none; font-size: 0.82rem; margin-bottom: 10px; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--brand); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between; font-size: 0.76rem;
+    }
+
+    /* ── WHATSAPP FLUTUANTE ── */
+    .whatsapp-float {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 58px; height: 58px; background: #25d366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(37,211,102,0.55); }
+    .whatsapp-float svg { width: 32px; height: 32px; fill: #fff; }
+
+    /* ── SKIP LINK (acessibilidade) ── */
+    .skip-link {
+      position: absolute; top: -40px; left: 0;
+      background: var(--brand); color: var(--white);
+      padding: 8px 16px; text-decoration: none; font-size: 0.85rem;
+      border-radius: 0 0 8px 0; z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── HAMBURGUER (só aparece no mobile) ── */
+    .hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; width: 36px; height: 36px;
+      background: transparent; border: none; cursor: pointer; padding: 4px;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--dark); border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Menu mobile oculto por padrão */
+    .nav-mobile-menu {
+      display: none;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(255,255,255,0.98);
+      flex-direction: column; gap: 0;
+      padding: 8px 5%;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      z-index: 99;
+      list-style: none;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu li { border-bottom: 1px solid var(--border); }
+    .nav-mobile-menu a {
+      display: block; padding: 14px 0;
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.1em; text-decoration: none;
+      color: var(--dark); transition: color 0.2s;
+    }
+    .nav-mobile-menu a:hover { color: var(--brand); }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 900px) {
+
+      /* Nav compacto */
+      nav {
+        position: relative;
+        height: 60px;
+        padding: 0 4%;
+        overflow: visible;
+      }
+
+      /* Hambúrguer visível */
+      .hamburger { display: flex; }
+
+      /* Links desktop ocultos no mobile */
+      .nav-links { display: none; }
+
+      /* Logo menor */
+      .nav-logo img { height: 32px !important; }
+
+      /* Botão em 2 linhas para caber no mobile */
+      .nav-actions .btn-primary {
+        font-size: 0.62rem;
+        padding: 6px 18px;
+        line-height: 1.4;
+        text-align: center;
+        white-space: normal;
+        width: 84px;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+
+      /* 2. Fotos do carrossel menores no mobile */
+      .carousel-slide img { height: 220px; }
+
+      /* 3. Footer em coluna única */
+      .footer-grid { grid-template-columns: 1fr; }
+
+      /* 4. WhatsApp menor e menos intrusivo */
+      .whatsapp-float { width: 46px; height: 46px; bottom: 20px; right: 20px; }
+      .whatsapp-float svg { width: 24px; height: 24px; }
+
+      /* 5. Hello bar com quebra controlada */
+      .hello-bar { font-size: 0.7rem; padding: 8px 4%; line-height: 1.6; }
+      .hello-bar-text { display: block; }
+      .hello-bar-link { display: block; }
+
+      /* Demais ajustes de layout */
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { min-height: 240px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .carousel-slide { min-width: 100%; }
+    }
+
+    /* ── ACESSIBILIDADE: foco visível ── */
+    :focus-visible {
+      outline: 3px solid var(--brand);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link para acessibilidade -->
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Botão flutuante WhatsApp -->
+  <a href="https://wa.me/5514998690118"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="whatsapp-float"
+     aria-label="Fale conosco pelo WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <!-- HEADER STICKY (hello bar + nav juntos) -->
+  <header class="site-header" role="banner">
+
+    <div class="hello-bar" role="region" aria-label="Aviso do site">
+      <span class="hello-bar-text">Av. Lorival Jauberte da Silva Braga, 740 B - Centro, Brotas/SP</span> &nbsp;
+
+    </div>
+
+    <nav role="navigation" aria-label="Menu principal">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-logo">
+        <a href="javascript:void(0)" data-target="home" aria-label="Vyapsicologia – Página inicial">
+          <img src="imagens/logo.png"
+               alt="Logo Vyapsicologia"
+               style="height:50px; width:auto; display:block;">
+        </a>
+      </div>
+      <ul class="nav-links" role="list">
+        <li><a href="javascript:void(0)" data-target="home">Home</a></li>
+        <li><a href="javascript:void(0)" data-target="nosso-espaco">Nosso Espaço</a></li>
+        <li><a href="javascript:void(0)" data-target="nossos-servicos">Nossos Serviços</a></li>
+        <li><a href="javascript:void(0)" data-target="nossa-equipe">Nossa Equipe</a></li>
+      </ul>
+      <!-- Menu exclusivo mobile -->
+      <ul class="nav-mobile-menu" id="navMobileMenu" role="list">
+        <li><a href="javascript:void(0)" data-target="home">Home</a></li>
+        <li><a href="javascript:void(0)" data-target="nosso-espaco">Nosso Espaço</a></li>
+        <li><a href="javascript:void(0)" data-target="nossos-servicos">Nossos Serviços</a></li>
+        <li><a href="javascript:void(0)" data-target="nossa-equipe">Nossa Equipe</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="https://wa.me/5514998690118"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="btn btn-primary"
+           aria-label="Agendar consulta pelo WhatsApp">Agendar Consulta</a>
+      </div>
+    </nav>
+
+  </header>
+
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <div class="hero-badge" role="text">Psicoterapia Online e Presencial</div>
+        <h1 id="hero-title" style="text-align:left; word-spacing:normal;">
+          Referência no cuidado<br/>da saúde mental<br/>em <em>Brotas</em>
+        </h1>
+        <p class="hero-desc">Promovemos o desenvolvimento e o equilíbrio emocional em um ambiente planejado para o seu bem-estar. Nossa equipe experiente oferece suporte especializado para a sua jornada pessoal ou profissional, além de soluções em saúde mental para empresas.</p>
+        <div class="hero-actions">
+          <a href="https://wa.me/5514998690118"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="btn btn-primary"
+             aria-label="Agendar consulta pelo WhatsApp">Agendar Consulta</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="imagens/amigos-juntos.jpg"
+             alt="Grupo de pessoas sorrindo ao ar livre, representando bem-estar e saúde emocional"
+             style="width:100%; height:100%; object-fit:cover; display:block; border-radius:var(--radius);">
+      </div>
+    </section>
+
+    <!-- NOSSO ESPAÇO -->
+    <section id="nosso-espaco" class="carousel-section" aria-labelledby="espaco-title">
+      <div class="carousel-header">
+        <span class="section-label">Venha nos visitar</span>
+        <h2 id="espaco-title" class="section-title">Nosso Espaço</h2>
+      </div>
+      <div class="carousel-wrapper" role="region" aria-label="Galeria de fotos do espaço" aria-live="polite">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="imagens/fotos-espaco/salafoto1.jpg"
+                 alt="Sala de atendimento da Vyapsicologia em Brotas, ambiente acolhedor e confortável">
+          </div>
+  	  <div class="carousel-slide">
+            <img src="imagens/fotos-espaco/salafoto2.jpg"
+                 alt="Sala de atendimento da Vyapsicologia em Brotas, ambiente acolhedor e confortável">
+          </div>
+          <div class="carousel-slide">
+            <img src="imagens/fotos-espaco/salafoto3.jpg"
+                 alt="Sala de atendimento da Vyapsicologia em Brotas, ambiente acolhedor e confortável">
+          </div>
+          <div class="carousel-slide">
+            <img src="imagens/fotos-espaco/salafoto4.jpg"
+                 alt="Sala de atendimento da Vyapsicologia em Brotas, ambiente acolhedor e confortável">
+         </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="prevBtn" aria-label="Foto anterior">←</button>
+        <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Navegação da galeria"></div>
+        <button class="carousel-btn" id="nextBtn" aria-label="Próxima foto">→</button>
+      </div>
+    </section>
+
+    <!-- NOSSOS SERVIÇOS -->
+    <section id="nossos-servicos" class="features" aria-labelledby="servicos-title">
+      <div class="section-label">Nossos serviços</div>
+      <h2 id="servicos-title" class="section-title">Cuidamos da saúde emocional<br/>e do desenvolvimento humano</h2>
+      <p class="section-desc">Temos profissionais experientes que buscam sempre as melhores soluções pensadas de forma individualizada e de acordo com cada contexto.</p>
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">💬</div>
+          <h3>Psicoterapia presencial e online</h3>
+          <p>Seja no nosso espaço físico ou no conforto da sua casa, faça terapia de onde você estiver.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">🔬</div>
+          <h3>Psicodiagnóstico</h3>
+          <p>Avaliação psicológica detalhada para identificar características, habilidades e necessidades individuais.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">📊</div>
+          <h3>Metodologia ABA</h3>
+          <p>Intervenção baseada em evidências para desenvolvimento comportamental e aprendizado.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">🌱</div>
+          <h3>Orientação profissional e de carreira</h3>
+          <p>Suporte especializado para escolhas e transições de carreira com clareza e propósito.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">❤️</div>
+          <h3>Cuidado personalizado a todos</h3>
+          <p>Atendimento humanizado e adaptado às necessidades únicas de cada pessoa.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">🎯</div>
+          <h3>Consultoria em saúde mental para empresas</h3>
+          <p>Soluções em saúde mental para equipes, com foco em bem-estar e produtividade.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- NOSSA EQUIPE -->
+    <section id="nossa-equipe" class="team-section" aria-labelledby="equipe-title">
+      <div class="team-header">
+        <span class="section-label">Conheça nossos profissionais</span>
+        <h2 id="equipe-title" class="section-title">Nossa Equipe</h2>
+      </div>
+      <div class="team-grid">
+
+        <!-- Profissional 1 -->
+        <article class="team-card">
+          <div class="team-photo" aria-label="Foto de Driele Paresqui">
+            <img src="imagens/foto-driele.jpg" alt="Foto de Driele Paresqui, psicóloga da Vyapsicologia">
+          </div>
+          <div class="team-info">
+            <div class="team-name">Driele Paresqui</div>
+            <div class="team-role" aria-label="Cargo: Psicóloga, CRP 06/116395">Psicóloga • CRP 06/116395</div>
+            <p class="team-bio">Psicóloga com sólida atuação clínica e corporativa. Foco em psicoterapia e consultoria, promovendo saúde mental, bem-estar e alta performance em diversos contextos.</p>
+            <div class="team-socials" role="list" aria-label="Redes sociais de Driele Paresqui">
+              <a href="https://www.linkedin.com/in/driele-paresqui/" target="_blank" rel="noopener noreferrer" class="team-social-link" title="LinkedIn de Driele Paresqui" aria-label="LinkedIn de Driele Paresqui" role="listitem">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Profissional 2 -->
+        <article class="team-card">
+          <div class="team-photo" aria-label="Foto de Leonardo Massaki">
+            <img src="imagens/foto-leonardo.png" alt="Foto de Leonardo Massaki, psicólogo da Vyapsicologia">
+          </div>
+          <div class="team-info">
+            <div class="team-name">Leonardo Massaki</div>
+            <div class="team-role" aria-label="Cargo: Psicólogo, CRP 06/133834">Psicólogo • CRP 06/133834</div>
+            <p class="team-bio">Formado pela PUC-SP e com 10 anos de experiência clínica e corporativa. Especialista em saúde mental, ofereço acolhimento e ferramentas para o seu equilíbrio emocional.</p>
+            <div class="team-socials" role="list" aria-label="Redes sociais de Leonardo Massaki">
+              <a href="https://www.instagram.com/psi.leonardo/" target="_blank" rel="noopener noreferrer" class="team-social-link" title="Instagram de Leonardo Massaki" aria-label="Instagram de Leonardo Massaki" role="listitem">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/leonardo-baba/" target="_blank" rel="noopener noreferrer" class="team-social-link" title="LinkedIn de Leonardo Massaki" aria-label="LinkedIn de Leonardo Massaki" role="listitem">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Profissional 3 -->
+        <article class="team-card">
+          <div class="team-photo" aria-label="Foto de Karla Dias">
+            <img src="imagens/foto-karla.jpg" alt="Foto de Karla Dias, psicóloga da Vyapsicologia">
+          </div>
+          <div class="team-info">
+            <div class="team-name">Karla Dias</div>
+            <div class="team-role" aria-label="Cargo: Psicóloga, CRP 06/155116">Psicóloga • CRP 06/155116</div>
+            <p class="team-bio">Psicóloga especialista em TEA e neurodesenvolvimento, com atuação clínica em ABA, TCC e neuropsicologia, focada em intervenção eficaz e cuidado humano.</p>
+            <div class="team-socials" role="list" aria-label="Redes sociais de Karla Dias">
+              <a href="https://www.linkedin.com/in/karla-aparecida-carlos-dias-aa0882230/" target="_blank" rel="noopener noreferrer" class="team-social-link" title="LinkedIn de Karla Dias" aria-label="LinkedIn de Karla Dias" role="listitem">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <h2 id="cta-title">Aproximando você do cuidado<br/>com a saúde emocional</h2>
+      <p>Psicoterapia, psicodiagnóstico, metodologia ABA, orientação profissional/carreira e consultoria em saúde mental.</p>
+      <a href="https://wa.me/5514998690118"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn btn-primary"
+         aria-label="Mais informações">Mais informações</a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="imagens/logo.png"
+               alt="Logo Vyapsicologia"
+               style="height:40px; width:auto; display:block;">
+        </div>
+        <p>Promovemos o equilíbrio emocional e a eficiência corporativa em um ambiente planejado para o seu bem-estar.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Serviços</h5>
+        <a href="javascript:void(0)" data-target="nossos-servicos">Psicoterapia</a>
+        <a href="javascript:void(0)" data-target="nossos-servicos">Psicodiagnóstico</a>
+        <a href="javascript:void(0)" data-target="nossos-servicos">Metodologia ABA</a>
+        <a href="javascript:void(0)" data-target="nossos-servicos">Orientação de carreira</a>
+      </div>
+      <div class="footer-col">
+        <h5>Links importantes</h5>
+        <a href="https://site.cfp.org.br/" target="_blank" rel="noopener noreferrer">Conselho Federal de Psicologia</a>
+        <a href="https://crpsp.org/" target="_blank" rel="noopener noreferrer">Conselho Regional de Psicologia</a>
+        <a href="https://site.cfp.org.br/wp-content/uploads/2018/05/RESOLU%C3%87%C3%83O-N%C2%BA-11-DE-11-DE-MAIO-DE-2018.pdf" target="_blank" rel="noopener noreferrer">Resolução de Atendimento Online</a>
+        <a href="https://www.gov.br/trabalho-e-emprego/pt-br/noticias-e-conteudo/2025/abril/inclusao-de-fatores-de-risco-psicossociais-no-gro-comeca-em-carater-educativo-a-partir-de-maio" target="_blank" rel="noopener noreferrer">NR1 - Gestão de Riscos Psicossociais</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <a href="https://wa.me/5514998690118" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Vyapsicologia | vyapsicologia@gmail.com</span>
+      <span>Brotas — SP</span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // ── HAMBURGUER ──
+    var hamburgerBtn = document.getElementById('hamburgerBtn');
+    var navMobileMenu = document.getElementById('navMobileMenu');
+
+    hamburgerBtn.addEventListener('click', function() {
+      var isOpen = navMobileMenu.classList.toggle('open');
+      hamburgerBtn.classList.toggle('open', isOpen);
+      hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // ── SCROLL – desktop e mobile ──
+    document.querySelectorAll('[data-target]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Fecha menu mobile se aberto
+        navMobileMenu.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+
+        // Scroll até a seção
+        var id = this.getAttribute('data-target');
+        var section = document.getElementById(id);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── CARROSSEL ──
+    var track = document.getElementById('carouselTrack');
+    var slides = track.querySelectorAll('.carousel-slide');
+    var dotsContainer = document.getElementById('carouselDots');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+
+    var isMobile = window.innerWidth <= 900;
+    var visibleCount = isMobile ? 1 : 2;
+    var totalSlides = slides.length;
+    var maxIndex = totalSlides - visibleCount;
+    var current = 0;
+
+    for (var i = 0; i <= maxIndex; i++) {
+      (function(idx) {
+        var dot = document.createElement('button');
+        dot.classList.add('carousel-dot');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', 'Foto ' + (idx + 1));
+        if (idx === 0) { dot.classList.add('active'); dot.setAttribute('aria-selected', 'true'); }
+        dot.addEventListener('click', function() { goTo(idx); });
+        dotsContainer.appendChild(dot);
+      })(i);
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(index, maxIndex));
+      var slideWidth = slides[0].offsetWidth + 15;
+      track.style.transform = 'translateX(-' + (current * slideWidth) + 'px)';
+      document.querySelectorAll('.carousel-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+        d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+      });
+    }
+
+    prevBtn.addEventListener('click', function() { goTo(current - 1); });
+    nextBtn.addEventListener('click', function() { goTo(current + 1); });
+    setInterval(function() { goTo(current < maxIndex ? current + 1 : 0); }, 4000);
+
+  });
+  </script>
+</body>
+</html>
